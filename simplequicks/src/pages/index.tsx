@@ -7,14 +7,24 @@ import QuestionAnswerOutlinedIcon from '@mui/icons-material/QuestionAnswerOutlin
 import ListAltIcon from '@mui/icons-material/ListAlt';
 
 import { useState } from "react";
+import Chat from "@/components/chat";
+import Task from "@/components/task";
 
 function ChildModal() {
-  const [open, setOpen] = useState(false);
-  const handleOpen = () => {
-    setOpen(true);
+  const [openChat, setOpenChat] = useState(false);
+  const handleOpenChat = () => {
+    setOpenChat(true);
   };
-  const handleClose = () => {
-    setOpen(false);
+  const handleCloseChat = () => {
+    setOpenChat(false);
+  };
+
+  const [openTask, setOpenTask] = useState(false);
+  const handleOpenTask = () => {
+    setOpenTask(true);
+  };
+  const handleCloseTask = () => {
+    setOpenTask(false);
   };
 
   return (
@@ -32,7 +42,7 @@ function ChildModal() {
           color="primary"
           aria-label="logo"
           sx={{ mr: 4, backgroundColor: "white" }}
-          onClick={handleOpen}
+          onClick={handleOpenTask}
         >
           <ListAltIcon />
         </IconButton>
@@ -42,27 +52,26 @@ function ChildModal() {
           color="primary"
           aria-label="logo"
           sx={{ mr: 10, backgroundColor: "white" }}
-          onClick={handleOpen}
+          onClick={handleOpenChat}
         >
           <QuestionAnswerOutlinedIcon />
         </IconButton>
       </Box>
       <Modal
-        open={open}
-        onClose={handleClose}
+        open={openChat}
+        onClose={handleCloseChat}
         aria-labelledby="child-modal-title"
         aria-describedby="child-modal-description"
       >
-        <Box sx={{
-          display: "flex",
-          justifyContent: "flex-end",
-          ml: "500px",
-          mr: "34px",
-          mt: "700px",
-          backgroundColor: "white",
-        }}>
-          <Button onClick={handleClose}>Close Child Modal</Button>
-        </Box>
+        <Chat />
+      </Modal>
+      <Modal
+        open={openTask}
+        onClose={handleCloseTask}
+        aria-labelledby="child-modal-title"
+        aria-describedby="child-modal-description"
+      >
+        <Task />
       </Modal>
     </>
   )
